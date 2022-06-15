@@ -8,8 +8,11 @@ const hbs = require("hbs");
 // console.log(__dirname);
 // console.log(path.join(__dirname, "../public"));
 
+const port = process.env.PORT || 3000;
+
 // Define path for Express Config
 const app = express();
+
 const publicDirectoryPath = path.join(__dirname, "../public");
 const viewPath = path.join(__dirname, "../templates/views");
 const partialPath = path.join(__dirname, "../templates/partials");
@@ -61,7 +64,7 @@ app.get("/weather", (request, response) => {
   }
   geocode.geocode(
     request.query.address,
-    (error, { latitude, longitude, location }={}) => {
+    (error, { latitude, longitude, location } = {}) => {
       if (error) {
         return response.send({ error });
       }
@@ -92,6 +95,6 @@ app.get("*", (request, response) => {
 //   response.send("About Page!");
 // });
 
-app.listen(3000, () => {
-  console.log("Server is up on port 3000");
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
 });
